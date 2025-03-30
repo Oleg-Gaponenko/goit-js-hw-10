@@ -11,7 +11,6 @@ const options = {
     onClose: handleOnClose,
   };
 
-
 const newInput = document.querySelector('#datetime-picker');
 flatpickr(newInput, options);
 
@@ -34,3 +33,47 @@ function handleOnClose (selectedDates) {
     } 
 }
 
+startButton.addEventListener('click', handleClick);
+
+function handleClick() {
+    startButton.disabled = true;
+    let timeInterval;
+
+    if(timeInterval) return;
+
+    timeInterval = setInterval(() => {
+        const currentTime = new Date().getTime();
+        const deltaTime = userSelectedDate - currentTime;
+
+        if(deltaTime <= 0){
+            timeInterval = false;
+            updateTime(0);
+        } else {
+            updateTime(deltaTime);
+        }
+    }, 1000);
+}
+
+const timer = document.querySelector('.timer');
+
+function updateTime(ms){
+    const {days, hours, minutes, seconds} = convertMs(ms);
+    const updatedTime = `${days} DAYS ${hours} HOURS ${minutes} MINUTES ${seconds} SECONDS`;
+    timer.innerHTML = updatedTime;
+
+}
+
+function convertMs(ms) {
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+  
+    const days = Math.floor(ms / day);
+    const hours = Math.floor((ms % day) / hour);
+    const minutes = Math.floor(((ms % day) % hour) / minute);
+    const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+  
+    return { days, hours, minutes, seconds };
+  }
+  
