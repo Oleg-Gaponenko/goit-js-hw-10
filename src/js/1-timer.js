@@ -22,8 +22,8 @@ function handleOnClose (selectedDates) {
     const currentDate = new Date();
 
     if(selectedDate <= currentDate){
-        iziToast.info({
-            title: 'Info',
+        iziToast.error({
+            title: 'Error',
             message: 'Please choose a date in the future',
         });
         startButton.disabled = true;
@@ -36,6 +36,8 @@ function handleOnClose (selectedDates) {
 startButton.addEventListener('click', handleClick);
 
 function handleClick() {
+    if(!userSelectedDate) return;
+
     startButton.disabled = true;
     let timeInterval;
 
@@ -46,8 +48,10 @@ function handleClick() {
         const deltaTime = userSelectedDate - currentTime;
 
         if(deltaTime <= 0){
-            timeInterval = false;
+            clearInterval(timeInterval);
             updateTime(0);
+            newInput.disabled = false;
+            return;
         } else {
             updateTime(deltaTime);
         }
@@ -55,12 +59,21 @@ function handleClick() {
 }
 
 const timer = document.querySelector('.timer');
+const turnaroundDays = document.querySelector('[days]');
+const turnaroundHours = document.querySelector('[hours]');
+const turnaroundMinutes = document.querySelector('[minutes]');
+const turnaroundSeconds = document.querySelector('[seconds]')
 
 function updateTime(ms){
     const {days, hours, minutes, seconds} = convertMs(ms);
-    const updatedTime = `${days} DAYS ${hours} HOURS ${minutes} MINUTES ${seconds} SECONDS`;
-    timer.innerHTML = updatedTime;
+    turnaroundDays = correctDisplay(days);
+    turnaroundHours = correctDisplay(hours);
+    turnaroundMinutes = correctDisplay(minutes);
+    turnaroundSeconds = correctDisplay(seconds);
+}
 
+function correctDisplay(timeNotion){
+    return String(timeNotion).padStart(2, '0');
 }
 
 function convertMs(ms) {
