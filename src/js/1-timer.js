@@ -16,6 +16,7 @@ flatpickr(newInput, options);
 
 let userSelectedDate = [];
 const startButton = document.querySelector('.button-start');
+startButton.disabled = true;
 
 function handleOnClose (selectedDates) {
     const selectedDate = selectedDates[0];
@@ -25,6 +26,10 @@ function handleOnClose (selectedDates) {
         iziToast.error({
             title: 'Error',
             message: 'Please choose a date in the future',
+            pauseOnHover: true,
+            closeOnClick: true,
+            closeOnEscape: true,
+            position: 'topRight',
         });
         startButton.disabled = true;
     } else {
@@ -34,13 +39,14 @@ function handleOnClose (selectedDates) {
 }
 
 startButton.addEventListener('click', handleClick);
+let timeInterval = false;
 
 function handleClick() {
-    if(!userSelectedDate) return;
+    if(userSelectedDate.length === 0) return;
 
     startButton.disabled = true;
-    let timeInterval;
-
+    newInput.disabled = true;
+    
     if(timeInterval) return;
 
     timeInterval = setInterval(() => {
@@ -58,22 +64,21 @@ function handleClick() {
     }, 1000);
 }
 
-const timer = document.querySelector('.timer');
-const turnaroundDays = document.querySelector('[days]');
-const turnaroundHours = document.querySelector('[hours]');
-const turnaroundMinutes = document.querySelector('[minutes]');
-const turnaroundSeconds = document.querySelector('[seconds]')
+const turnaroundDays = document.querySelector('[data-days]');
+const turnaroundHours = document.querySelector('[data-hours]');
+const turnaroundMinutes = document.querySelector('[data-minutes]');
+const turnaroundSeconds = document.querySelector('[data-seconds]')
 
 function updateTime(ms){
     const {days, hours, minutes, seconds} = convertMs(ms);
-    turnaroundDays = correctDisplay(days);
-    turnaroundHours = correctDisplay(hours);
-    turnaroundMinutes = correctDisplay(minutes);
-    turnaroundSeconds = correctDisplay(seconds);
+    turnaroundDays.textContent = addLeadingZero(days);
+    turnaroundHours.textContent = addLeadingZero(hours);
+    turnaroundMinutes.textContent = addLeadingZero(minutes);
+    turnaroundSeconds.textContent = addLeadingZero(seconds);
 }
 
-function correctDisplay(timeNotion){
-    return String(timeNotion).padStart(2, '0');
+function addLeadingZero(value){
+    return String(value).padStart(2, '0');
 }
 
 function convertMs(ms) {
