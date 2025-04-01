@@ -1,8 +1,8 @@
 .container {
   display: flex;
-  width: 1440px;
-  height: 496px;
-  padding: 36px 929px 316px 156px;
+  width: 355px;
+  height: 144px;
+  margin: 36px 156px;
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
@@ -10,30 +10,83 @@
 .select-date {
   display: flex;
   align-items: flex-start;
+  width: 100%;
   gap: 8px;
 }
+
+#datetime-picker {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 272px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 1px solid #808080;
+
+  color: #2e2f42;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.64px;
+  transition: border 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+#datetime-picker:hover {
+  border: 1px solid #000000;
+}
+
+#datetime-picker:focus {
+  border: 1px solid #4e75ff;
+  outline: none;
+}
+
+#datetime-picker:disabled {
+  background-color: #fafafa;
+  border: 1px solid #808080;
+  cursor: not-allowed;
+  color: #808080;
+}
+
 .button-start {
   display: flex;
-  width: 43px;
-  height: 24px;
+  width: auto;
+  height: auto;
   padding: 8px 16px;
   justify-content: center;
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  background: #cfcfcf;
+  background-color: #4e75ff;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  border: none;
 
-  color: #989898;
-  font-family: Montserrat;
+  color: #ffffff;
+  font-family: Montserrat, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px; /* 150% */
+  line-height: 1.5;
   letter-spacing: 0.64px;
 }
+
+.button-start:hover {
+  background-color: #6c8cff;
+}
+
+.button-start:disabled {
+  background-color: #cfcfcf;
+  color: #989898;
+  cursor: not-allowed;
+}
+
 .timer {
   display: flex;
-  width: 346px;
+  width: 100%;
   height: 72px;
   align-items: flex-start;
   gap: 24px;
@@ -47,7 +100,8 @@
 }
 .value {
   color: #2e2f42;
-  /* font-family: Montserrat; */
+  font-family: Montserrat, sans-serif;
+  text-align: center;
   width: 55px;
   height: 48px;
   font-size: 40px;
@@ -58,7 +112,7 @@
 }
 .label {
   color: #2e2f42;
-  /* font-family: Montserrat; */
+  font-family: Montserrat;
   width: auto;
   height: auto;
   font-size: 16px;
