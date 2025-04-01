@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-10/assets/2-snackbar-DGW77gSz.css">
+  </head>
+  <body>
+    <form class="form">
+      <label class="delay-label">
+        Delay (ms)
+        <input class="delay-input-form" type="number" name="delay" required />
+      </label>
+
+      <fieldset>
+        <legend class="state-legend-field">State</legend>
+        <label class="state-label">
+          <input
+            class="state-input"
+            type="radio"
+            name="state"
+            value="fulfilled"
+            required
+          />
+          Fulfilled
+        </label>
+        <label class="state-input">
+          <input
+            class="state-input"
+            type="radio"
+            name="state"
+            value="rejected"
+            required
+          />
+          Rejected
+        </label>
+      </fieldset>
+
+      <button class="submit-button" type="submit">Create notification</button>
+    </form>
+  </body>
+</html>
